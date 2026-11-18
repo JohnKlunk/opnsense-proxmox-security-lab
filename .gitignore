@@ -1,0 +1,45 @@
+# Local OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Secrets and private overrides
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+secrets/
+private/
+
+# Live system backups, disk images, raw logs and captures
+config.xml
+config-*.xml
+backup/
+backups/
+exports/
+*.pcap
+*.pcapng
+*.log
+*.qcow2
+*.vmdk
+*.iso
+*.ova
+*.vma*
+*.zip
+*.tar*
+
+# Raw evidence stays private; reviewed evidence can be added explicitly
+evidence/raw/
+
+# Generated caches
+__pycache__/
+*.pyc
+.venv/
