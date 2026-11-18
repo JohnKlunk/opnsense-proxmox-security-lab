@@ -1,0 +1,19 @@
+flowchart TB
+    net[Internet] <--> upstream[Upstream router / NAT]
+    upstream <--> wan[OPNsense WAN / outbound NAT]
+    subgraph host[Proxmox host — logical view]
+        wan <--> fw[OPNsense VM
+Stateful rules + BAD_IPS blocks]
+        fw <--> bridge[vmbr1 — VLAN aware
+Tagged VLAN20 toward firewall]
+        bridge <--> guest[VLAN20 test VM
+Access attachment: tag 20 in Proxmox]
+        fw --- dhcp[dnsmasq DHCP]
+        fw --- ids[Suricata IDS + ET Open
+Actual capture interface to confirm]
+    end
+    fw -. planned firewall logs .-> collector[Planned collection / normalization]
+    ids -. planned alerts .-> collector
+    guest -. planned endpoint telemetry .-> collector
+    collector -. not deployed .-> wazuh[Wazuh manager + indexer + dashboard]
+    wazuh -. planned investigation .-> analyst[Analyst triage]
